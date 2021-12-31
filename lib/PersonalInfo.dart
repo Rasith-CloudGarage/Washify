@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:project/EditProfile.dart';
 import 'package:project/ProfileSettings.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -134,8 +135,33 @@ class PersonalInfo extends StatelessWidget {
                                     ,fontWeight: FontWeight.normal,fontFamily: 'Signika'),
                                 ),
                               ),
-
                             ],
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                              Route route=MaterialPageRoute(builder: (context) => EditProfile());
+                              Navigator.pushReplacement(context, route);
+                            },
+                            child:Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 40.0),
+                                  child: Icon(
+                                    FontAwesomeIcons.edit,
+                                    color: Colors.blue,
+                                    size: 22.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10,top: 40),
+                                  child:Text('Edit Profile',style: TextStyle(fontSize: 20
+                                      ,fontWeight: FontWeight.normal,fontFamily: 'Signika'),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
