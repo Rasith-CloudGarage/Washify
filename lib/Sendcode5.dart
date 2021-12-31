@@ -194,9 +194,9 @@ class Sendcode5 extends StatelessWidget {
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
-                                  Text('2x  Black Tshirt',style: new TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                  Text('2x Tshirt',style: new TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                   Container(
-                                    margin: const EdgeInsets.only(left: 50),
+                                    margin: const EdgeInsets.only(left: 85),
                                     child: Text('Rs.200',style: TextStyle(fontSize: 20),),
                                   ),
                                   Padding(

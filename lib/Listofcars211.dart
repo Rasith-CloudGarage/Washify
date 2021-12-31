@@ -122,7 +122,7 @@ class Listofcars211 extends StatelessWidget {
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text('Black Tshirt',style: new TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                  Text('Tshirt',style: new TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                   Padding(
                                     padding: EdgeInsets.only(top: 10.0,right: 5),
                                     child: GestureDetector(
