@@ -5,15 +5,15 @@ import 'package:project/ProfileSettings.dart';
 
 class EditProfile extends StatelessWidget {
   final FocusNode focusEmail = FocusNode();
-  final FocusNode focusPassword = FocusNode();
-  final FocusNode focusName = FocusNode();
+  final FocusNode focusPhone = FocusNode();
+  final FocusNode focusDOB = FocusNode();
   final FocusNode focusConfirmPassword = FocusNode();
   final GlobalKey<ScaffoldState> _mainScaffoldKey =
   new GlobalKey<ScaffoldState>();
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "mohammedrasith99@gmail.com");
+  final TextEditingController phoneController = TextEditingController(text: "8608952178");
+  final TextEditingController dobController = TextEditingController(text: "27/04/1995");
   final TextEditingController confirmPasswordController =
   TextEditingController();
   @override
@@ -80,7 +80,7 @@ class EditProfile extends StatelessWidget {
                           child: TextField(
                             focusNode: focusEmail,
                             controller: emailController,
-                            keyboardType: TextInputType.datetime,
+                            keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                                 fontFamily: "SignikaSemiBold",
                                 fontSize: 16.0,
@@ -108,9 +108,9 @@ class EditProfile extends StatelessWidget {
                           padding: EdgeInsets.only(
                               top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                           child: TextField(
-                            focusNode: focusEmail,
-                            controller: emailController,
-                            keyboardType: TextInputType.datetime,
+                            focusNode: focusPhone,
+                            controller: phoneController,
+                            keyboardType: TextInputType.phone,
                             style: TextStyle(
                                 fontFamily: "SignikaSemiBold",
                                 fontSize: 16.0,
@@ -137,8 +137,8 @@ class EditProfile extends StatelessWidget {
                           padding: EdgeInsets.only(
                               top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                           child: TextField(
-                            focusNode: focusEmail,
-                            controller: emailController,
+                            focusNode: focusDOB,
+                            controller: dobController,
                             keyboardType: TextInputType.datetime,
                             style: TextStyle(
                                 fontFamily: "SignikaSemiBold",
@@ -167,7 +167,7 @@ class EditProfile extends StatelessWidget {
                           child:RaisedButton(
                               textColor: Colors.white,
                               color: Colors.blue,
-                              onPressed: (){},
+                              onPressed: (){displaySnackBar("Profile Updated Successfully");},
                               child: Text('Edit')),
                         ),
 
@@ -181,5 +181,17 @@ class EditProfile extends StatelessWidget {
         ),
       ),
     );
+  }
+  void displaySnackBar(String value) {
+    _mainScaffoldKey.currentState!.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Colors.white, fontSize: 16.0, fontFamily: "SignikaRegular"),
+      ),
+      backgroundColor: Colors.blue,
+      duration: Duration(seconds: 3),
+    ));
   }
 }

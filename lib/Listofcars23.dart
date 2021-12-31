@@ -129,8 +129,8 @@ class Listofcars23 extends StatelessWidget {
                   },
 
                   child:new Container(
-                    width: 200,
-                    height: 200,
+                    width: 150,
+                    height: 150,
                     margin: const EdgeInsets.only(top: 20),
                     child: Card(
                       shape: RoundedRectangleBorder(
@@ -184,8 +184,8 @@ class Listofcars23 extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 200,
-                  height: 200,
+                  width: 150,
+                  height: 150,
                   margin: const EdgeInsets.only(top: 20),
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -222,8 +222,8 @@ class Listofcars23 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  width: 200,
-                  height: 200,
+                  width: 150,
+                  height: 150,
                   margin: const EdgeInsets.only(bottom: 20),
                   child: Card(
                     shape: RoundedRectangleBorder(

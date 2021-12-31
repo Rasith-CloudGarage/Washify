@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:project/Enter3.dart';
+import 'package:project/Notifications.dart';
 import 'package:project/RegistrationDetails3.dart';
 import './MyCards.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -232,7 +233,8 @@ class ProfileSettings extends StatelessWidget {
                                   padding: EdgeInsets.only(top: 10.0,right: 5),
                                   child: GestureDetector(
                                     onTap: (){
-
+                                      Route route  = MaterialPageRoute(builder: (context) => Notifications());
+                                      Navigator.pushReplacement(context, route);
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(15.0),
