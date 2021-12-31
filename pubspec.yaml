@@ -79,6 +79,7 @@ flutter:
     - assets/images/shoe.png
     - assets/images/other.png
     - assets/images/shop.png
+    - assets/images/profile.png
 
   fonts:
     - family: Momcake

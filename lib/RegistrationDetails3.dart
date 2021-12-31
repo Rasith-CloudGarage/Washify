@@ -395,7 +395,8 @@ class RegistrationDetails3 extends StatelessWidget {
                                     "phone":phoneController.text,
                                     "country":countryController.text,
                                     "city":cityController.text,
-                                    "address":addressController.text})
+                                    "address":addressController.text,
+                                  "name":firstnameController.text+" "+lastnameController.text})
                                       .then((value) => displaySnackBar("Register Successfull"));
 
                                 });
