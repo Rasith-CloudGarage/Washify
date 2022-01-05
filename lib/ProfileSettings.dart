@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:project/Enter3.dart';
@@ -13,6 +14,7 @@ import './Support6.dart';
 import './Menu3.dart';
 import './Settings1.dart';
 import './Listofcars23.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -341,15 +343,17 @@ class ProfileSettings extends StatelessWidget {
                                 ),
                               ]),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.0),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(top: 10.0, right: 5.0),
-                                  child: GestureDetector(
-                                    onTap: () => {},
+                        GestureDetector(
+                          onTap: () {
+                            openwhatsapp(context);
+                          },
+                          child:Container(
+                            margin: const EdgeInsets.only(top: 10.0),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 10.0, right: 5.0),
                                     child: Container(
                                       padding: const EdgeInsets.all(15.0),
                                       decoration: new BoxDecoration(
@@ -362,9 +366,9 @@ class ProfileSettings extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                ),
-                                Text('WhatsApp Help Chat',style: new TextStyle(fontFamily: "Signika", fontSize: 20, fontWeight: FontWeight.bold),),
-                              ]),
+                                  Text('WhatsApp Help Chat',style: new TextStyle(fontFamily: "Signika", fontSize: 20, fontWeight: FontWeight.bold),),
+                                ]),
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.only(top: 50),
@@ -428,6 +432,18 @@ class ProfileSettings extends StatelessWidget {
       ),
     );
   }
+  openwhatsapp(BuildContext context) async{
+    var whatsapp ="+918608952178";
+    var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=Help Needed :-> ";
+      // android , web
+      if( await canLaunch(whatsappURl_android)){
+        await launch(whatsappURl_android);
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: new Text("whatsapp no installed")));
+      }
+  }
+
 }
 
 const String _svg_ffj51b =
