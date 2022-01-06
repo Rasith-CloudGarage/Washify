@@ -6,6 +6,7 @@ import 'package:adobe_xd/page_link.dart';
 import './Listofcars216.dart';
 import './DeliveryLocation3.dart';
 import './DeliveryLocation8.dart';
+import 'package:intl/intl.dart';
 import './Listofcars27.dart';
 import './DeliveryLocation10.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +21,7 @@ class Sendcode5 extends StatelessWidget {
   final GlobalKey<ScaffoldState> _mainScaffoldKey =
   new GlobalKey<ScaffoldState>();
 
+  late DateTime _selectedDate;
   final TextEditingController pickupAddressController = TextEditingController();
   final TextEditingController deliveryAddressController = TextEditingController();
   final TextEditingController pickupDateController = TextEditingController();
@@ -343,28 +345,31 @@ class Sendcode5 extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top:10,bottom: 10.0, left: 25.0, right: 25.0),
-                            child: TextField(
-                              focusNode: focusPickupDate,
-                              controller: pickupDateController,
-                              keyboardType: TextInputType.datetime,
-                              style: TextStyle(
-                                  fontFamily: "SignikaSemiBold",
-                                  fontSize: 16.0,
-                                  color: Colors.black),
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  icon: Icon(
-                                    FontAwesomeIcons.calendar,
-                                    color: Colors.black,
-                                    size: 22.0,
-                                  ),
-                                  hintText: "Enter Pick-up Date",
-                                  hintStyle: TextStyle(
-                                      fontFamily: "SignikaSemiBold",
-                                      fontSize: 18.0)),
+                          GestureDetector(
+                            onTap: () {_selectDate(context);},
+                            child:Padding(
+                              padding: EdgeInsets.only(
+                                  top:10,bottom: 10.0, left: 25.0, right: 25.0),
+                              child: TextField(
+                                focusNode: focusPickupDate,
+                                controller: pickupDateController,
+                                keyboardType: TextInputType.datetime,
+                                style: TextStyle(
+                                    fontFamily: "SignikaSemiBold",
+                                    fontSize: 16.0,
+                                    color: Colors.black),
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    icon: Icon(
+                                      FontAwesomeIcons.calendar,
+                                      color: Colors.black,
+                                      size: 22.0,
+                                    ),
+                                    hintText: "Enter Pick-up Date",
+                                    hintStyle: TextStyle(
+                                        fontFamily: "SignikaSemiBold",
+                                        fontSize: 18.0)),
+                              ),
                             ),
                           ),
                           Container(
@@ -591,6 +596,41 @@ class Sendcode5 extends StatelessWidget {
       duration: Duration(seconds: 3),
     ));
   }
+  _selectDate(BuildContext context) async {
+    DateTime? newSelectedDate = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2040),
+        builder: (BuildContext context,Widget? child) {
+          return Theme(
+            data: ThemeData.dark().copyWith(
+              colorScheme: ColorScheme.dark(
+                primary: Colors.deepPurple,
+                onPrimary: Colors.white,
+                surface: Colors.blueGrey,
+                onSurface: Colors.yellow,
+              ),
+              dialogBackgroundColor: Colors.blue[500],
+            ),
+            child: child!,
+          );
+        });
+
+    if (newSelectedDate != null) {
+      _selectedDate = newSelectedDate;
+      pickupDateController
+        ..text = DateFormat.yMMMd().format(_selectedDate)
+        ..selection = TextSelection.fromPosition(TextPosition(
+            offset: pickupDateController.text.length,
+            affinity: TextAffinity.upstream));
+    }
+  }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
 }
 
 const String _svg_ffj51b =
