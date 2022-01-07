@@ -388,9 +388,12 @@ class RegistrationDetails3 extends StatelessWidget {
                               ),
                               onPressed: () {
                                 fb.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value) {
-                                  FirebaseFirestore.instance.collection('User Data')
-                                      .doc(value.user?.email)
-                                      .set({"email":value.user?.email,
+                                  FirebaseFirestore.instance.collection(currentUser())
+                                      .doc('User Details')
+                                      .set({
+                                    "firstName":firstnameController.text,
+                                    "lastName":lastnameController.text,
+                                    "email":value.user?.email,
                                     "password":passwordController.text,
                                     "phone":phoneController.text,
                                     "country":countryController.text,
@@ -559,6 +562,11 @@ class RegistrationDetails3 extends StatelessWidget {
       backgroundColor: Colors.blue,
       duration: Duration(seconds: 3),
     ));
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 

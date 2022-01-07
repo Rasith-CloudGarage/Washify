@@ -10,6 +10,7 @@ import 'Listofcars213.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Listofcars26 extends StatelessWidget {
+final FirebaseAuth fb=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +93,7 @@ class Listofcars26 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Cloth Type')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Cloth Type')
                                             .set({"type":'Hat'
                                         });
                                     },
@@ -138,7 +139,7 @@ class Listofcars26 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Cloth Type')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Cloth Type')
                                             .set({"type":'Top'
                                         });
                                     },
@@ -184,7 +185,7 @@ class Listofcars26 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Cloth Type')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Cloth Type')
                                             .set({"type":'Bottom'
                                         });
                                     },
@@ -230,7 +231,7 @@ class Listofcars26 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Cloth Type')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Cloth Type')
                                             .set({"type":'Shoe and Socks'
                                         });
                                     },
@@ -276,7 +277,7 @@ class Listofcars26 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Cloth Type')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Cloth Type')
                                             .set({"type":'Others'
                                         });
                                     },
@@ -333,6 +334,11 @@ class Listofcars26 extends StatelessWidget {
       ),
     );
   }
+currentUser() {
+  final User? user = fb.currentUser;
+  final email = user?.email.toString();
+  return email;
+}
 }
 
 const String _svg_ffj51b =
