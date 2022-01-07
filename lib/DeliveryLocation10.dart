@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'AddCard1.dart';
 
 class DeliveryLocation10 extends StatelessWidget {
+  final FirebaseAuth fb=FirebaseAuth.instance;
   final FocusNode focusEmail = FocusNode();
   final FocusNode focusPassword = FocusNode();
   final GlobalKey<ScaffoldState> _mainScaffoldKey =
@@ -256,7 +257,7 @@ class DeliveryLocation10 extends StatelessWidget {
                               onPressed: () {
                                 Route route = MaterialPageRoute(builder: (context) => LocationInfo2());
                                 Navigator.pushReplacement(context, route);
-                                FirebaseFirestore.instance.collection('User Data').doc('Payment Status')
+                                FirebaseFirestore.instance.collection(currentUser()).doc('Payment Status')
                                     .set({"Status":'Payment Success Order Placed'
                                 });
                               },
@@ -398,6 +399,11 @@ class DeliveryLocation10 extends StatelessWidget {
       backgroundColor: Colors.blue,
       duration: Duration(seconds: 3),
     ));
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 

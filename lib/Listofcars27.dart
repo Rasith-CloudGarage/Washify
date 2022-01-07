@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Listofcars27 extends StatelessWidget {
+  final FirebaseAuth fb=FirebaseAuth.instance;
   final FocusNode focusPassword = FocusNode();
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -112,7 +113,7 @@ class Listofcars27 extends StatelessWidget {
                                         Navigator.pushReplacement(context, route);
                                         final firebaseUser=FirebaseAuth.instance.currentUser!;
                                         if(firebaseUser!=null)
-                                          FirebaseFirestore.instance.collection('User Data').doc('Shop')
+                                          FirebaseFirestore.instance.collection(currentUser()).doc('Shop')
                                               .set({"Name":'Laundry Shop 1'
                                           });
                                       },
@@ -143,7 +144,7 @@ class Listofcars27 extends StatelessWidget {
                                         Navigator.pushReplacement(context, route);
                                         final firebaseUser=FirebaseAuth.instance.currentUser!;
                                         if(firebaseUser!=null)
-                                          FirebaseFirestore.instance.collection('User Data').doc('Shop')
+                                          FirebaseFirestore.instance.collection(currentUser()).doc('Shop')
                                               .set({"Name":'Laundry Shop 2'
                                           });
                                       },
@@ -177,6 +178,11 @@ class Listofcars27 extends StatelessWidget {
         ),
       ),
     );
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 

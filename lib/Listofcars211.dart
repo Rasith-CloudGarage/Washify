@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Listofcars211 extends StatelessWidget {
+  final FirebaseAuth fb=FirebaseAuth.instance;
   final FocusNode focusPassword = FocusNode();
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -168,7 +169,7 @@ class Listofcars211 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Order Items')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Order Items')
                                             .set({"Rupees":'150'
                                         });
                                     },
@@ -190,6 +191,11 @@ class Listofcars211 extends StatelessWidget {
         ),
       ),
     );
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 

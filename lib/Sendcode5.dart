@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './Sendcode6.dart';
@@ -28,6 +29,7 @@ class Sendcode5 extends StatelessWidget {
   final TextEditingController deliveryDateController =
   TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final FirebaseAuth fb=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -555,7 +557,7 @@ class Sendcode5 extends StatelessWidget {
                                     onPressed: () {
                                       Route route = MaterialPageRoute(builder: (context) => DeliveryLocation10());
                                       Navigator.pushReplacement(context, route);
-                                      FirebaseFirestore.instance.collection('User Data')
+                                      FirebaseFirestore.instance.collection(currentUser())
                                           .doc('Order Details')
                                           .set({"pickupAddress":pickupAddressController.text,
                                         "deliveryAddress":deliveryAddressController.text,
@@ -625,6 +627,11 @@ class Sendcode5 extends StatelessWidget {
             offset: pickupDateController.text.length,
             affinity: TextAffinity.upstream));
     }
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 

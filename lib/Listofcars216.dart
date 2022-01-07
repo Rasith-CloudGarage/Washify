@@ -9,6 +9,7 @@ import './Sendcode5.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Listofcars216 extends StatelessWidget {
+  final FirebaseAuth fb=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,7 +224,7 @@ class Listofcars216 extends StatelessWidget {
                                       Navigator.pushReplacement(context, route);
                                       final firebaseUser=FirebaseAuth.instance.currentUser!;
                                       if(firebaseUser!=null)
-                                        FirebaseFirestore.instance.collection('User Data').doc('Submit Order')
+                                        FirebaseFirestore.instance.collection(currentUser()).doc('Submit Order')
                                             .set({"Status":'Pending Payment'
                                         });
                                     },
@@ -245,6 +246,11 @@ class Listofcars216 extends StatelessWidget {
         ),
       ),
     );
+  }
+  currentUser() {
+    final User? user = fb.currentUser;
+    final email = user?.email.toString();
+    return email;
   }
 }
 
