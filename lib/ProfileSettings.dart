@@ -1,9 +1,11 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:project/Enter3.dart';
 import 'package:project/Notifications.dart';
 import 'package:project/RegistrationDetails3.dart';
+import 'package:toast/toast.dart';
 import './MyCards.dart';
 import 'package:adobe_xd/page_link.dart';
 import './PersonalInfo.dart';
@@ -381,8 +383,31 @@ class ProfileSettings extends StatelessWidget {
                                 padding: EdgeInsets.only(top: 10.0,left: 10, right: 5.0),
                                 child: GestureDetector(
                                   onTap: ()  {
-                                    Route route = MaterialPageRoute(builder: (context) => Enter3());
-                                    Navigator.pushReplacement(context, route);
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => new AlertDialog(
+                                        title: new Text('Logout'),
+                                        content: Text(
+                                            'Are you sure to logout?'),
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            onPressed: () {
+                                              _signOut();
+                                              Route route = MaterialPageRoute(builder: (context) => Enter3());
+                                              Navigator.pushReplacement(context, route);
+                                              Toast.show('Logout Successfully', context,duration: Toast.LENGTH_SHORT,gravity: Toast.BOTTOM);
+                                            },
+                                            child: new Text('Yes'),
+                                          ),
+                                          FlatButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: new Text('No'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(15.0),
@@ -431,6 +456,9 @@ class ProfileSettings extends StatelessWidget {
         ),
       ),
     );
+  }
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
   openwhatsapp(BuildContext context) async{
     var whatsapp ="+918608952178";
