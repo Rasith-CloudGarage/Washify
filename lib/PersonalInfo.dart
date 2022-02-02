@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/EditProfile.dart';
@@ -68,12 +69,26 @@ class PersonalInfo extends StatelessWidget {
                                         'assets/images/profile.png')
                                 ),
                                   )),
-                          Container(
-                            margin: const EdgeInsets.only(top: 30.0),
-                            child: Text(
-                              'Mohamed Rasith',overflow: TextOverflow.ellipsis,style: new TextStyle(fontSize:30,fontFamily:"Momcake",fontWeight:FontWeight.bold,color: Colors.black),
-                            ),
+                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                            stream: FirebaseFirestore.instance.collection('User Details').doc().snapshots(),
+                            builder: (_, snapshot) {
+                              if (snapshot.hasError) return Text('Error = ${snapshot.error}');
+
+                              if (snapshot.hasData) {
+                                var output = snapshot.data!.data();
+                                var value = output!['name']; // <-- Your value
+                                return Container(
+                                  margin: const EdgeInsets.only(top: 30.0),
+                                  child: Text(
+                                    value,overflow: TextOverflow.ellipsis,style: new TextStyle(fontSize:30,fontFamily:"Momcake",fontWeight:FontWeight.bold,color: Colors.black),
+                                  ),
+                                );
+                              }
+
+                              return Center(child: CircularProgressIndicator());
+                            },
                           ),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
@@ -88,8 +103,24 @@ class PersonalInfo extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10,top: 40),
-                                child:Text('mohammedrasith99@gmail.com',style: TextStyle(fontSize: 20
-                                    ,fontWeight: FontWeight.normal,fontFamily: 'Signika'),
+                                child:StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                                  stream: FirebaseFirestore.instance.collection('User Details').doc().snapshots(),
+                                  builder: (_, snapshot) {
+                                    if (snapshot.hasError) return Text('Error = ${snapshot.error}');
+
+                                    if (snapshot.hasData) {
+                                      var output = snapshot.data!.data();
+                                      var value = output!['email']; // <-- Your value
+                                      return Container(
+                                        margin: const EdgeInsets.only(top: 30.0),
+                                        child: Text(
+                                          value,overflow: TextOverflow.ellipsis,style: new TextStyle(fontSize:30,fontFamily:"Momcake",fontWeight:FontWeight.bold,color: Colors.black),
+                                        ),
+                                      );
+                                    }
+
+                                    return Center(child: CircularProgressIndicator());
+                                  },
                                 ),
                               ),
 
@@ -110,8 +141,24 @@ class PersonalInfo extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10,top: 40),
-                                child:Text('8608952178',style: TextStyle(fontSize: 20
-                                    ,fontWeight: FontWeight.normal,fontFamily: 'Signika'),
+                                child:StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                                  stream: FirebaseFirestore.instance.collection('User Details').doc().snapshots(),
+                                  builder: (_, snapshot) {
+                                    if (snapshot.hasError) return Text('Error = ${snapshot.error}');
+
+                                    if (snapshot.hasData) {
+                                      var output = snapshot.data!.data();
+                                      var value = output!['phone']; // <-- Your value
+                                      return Container(
+                                        margin: const EdgeInsets.only(top: 30.0),
+                                        child: Text(
+                                          value,overflow: TextOverflow.ellipsis,style: new TextStyle(fontSize:30,fontFamily:"Momcake",fontWeight:FontWeight.bold,color: Colors.black),
+                                        ),
+                                      );
+                                    }
+
+                                    return Center(child: CircularProgressIndicator());
+                                  },
                                 ),
                               ),
 
@@ -131,7 +178,7 @@ class PersonalInfo extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10,top: 40),
-                                child:Text('DOB: 27/04/1995',style: TextStyle(fontSize: 20
+                                child:Text('27/04/1995',style: TextStyle(fontSize: 20
                                     ,fontWeight: FontWeight.normal,fontFamily: 'Signika'),
                                 ),
                               ),

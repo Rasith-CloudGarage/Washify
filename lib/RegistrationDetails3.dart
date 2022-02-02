@@ -388,9 +388,9 @@ class RegistrationDetails3 extends StatelessWidget {
                               ),
                               onPressed: () {
                                 fb.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value) {
-                                  FirebaseFirestore.instance.collection(currentUser())
-                                      .doc('User Details')
-                                      .set({
+                                  FirebaseFirestore.instance
+                                      .collection('User Details')
+                                      .add({
                                     "firstName":firstnameController.text,
                                     "lastName":lastnameController.text,
                                     "email":value.user?.email,
